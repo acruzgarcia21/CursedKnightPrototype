@@ -1,17 +1,17 @@
-# 🩸 Cursed Knight
+# Cursed Knight
 
 **Cursed Knight** is a dark fantasy dungeon-crawling deckbuilder prototype built in Unity.  
 The player balances raw steel and forbidden power, risking corruption to unleash devastating attacks.
 
 ---
 
-## 🎮 High Concept
+## High Concept
 
 Cursed Knight is a turn-based deckbuilder where players begin as a pure knight and gradually embrace corruption through powerful reward cards. Each combat encounter forces a decision: play safe, or risk triggering a devastating **Curse Surge**.
 
 ---
 
-## 🧠 Core Mechanics
+## Core Mechanics
 
 ### Combat Rules
 - Player starts with **60 HP**
@@ -32,7 +32,7 @@ Corruption represents forbidden strength. The more it is used, the closer the kn
 
 ---
 
-## 🃏 Starting Deck (10 Cards)
+## Starting Deck (10 Cards)
 
 | Card           | Cost | Effect                         | Copies |
 |---------------|------|--------------------------------|--------|
@@ -44,7 +44,7 @@ The starting deck is intentionally weak to encourage meaningful upgrades.
 
 ---
 
-## 🏆 Reward System
+## Reward System
 
 After each fight:
 1. 3 random cards are selected from a reward pool of 8
@@ -58,7 +58,7 @@ After each fight:
 
 ---
 
-## 👹 Enemies
+## Enemies
 
 ### Crypt Rat
 - HP: 25
@@ -84,7 +84,7 @@ After each fight:
 
 ---
 
-## ⚙️ Tech Stack
+## Tech Stack
 
 - Unity (2D)
 - C#
@@ -93,11 +93,11 @@ After each fight:
 
 ---
 
-## 🚧 Development Status
+## Development Status
 - Corruption scaling bonuses
 
 
-## 📜 License
+## License
 
 This project is currently a prototype and not licensed for commercial distribution.---
 - Dungeon map system
