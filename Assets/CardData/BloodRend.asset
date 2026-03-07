@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ee63a2c5162e62e439988289d45b4ef5, type: 3}
-  m_Name: Focus
+  m_Name: BloodRend
   m_EditorClassIdentifier: Assembly-CSharp::CursedKnight.Card
-  cardName: Focus
-  cardEnergyCost: 0
-  cardDescription: Gain 1 energy this turn
+  cardName: Blood Rend
+  cardEnergyCost: 1
+  cardDescription: Deal 6 damage twice
   cardCorruptionGain: 1
-  cardType: 2
+  cardType: 0
