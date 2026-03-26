@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace CursedKnight
@@ -6,10 +7,17 @@ namespace CursedKnight
     public class Card : ScriptableObject
     {
         public string cardName;
-        public int cardEnergyCost;
         public string cardDescription;
-        public int cardCorruptionGain;
+       
         public CardType cardType;
+        
+        public Sprite cardSprite;
+        
+        public int cardEnergyCost;
+        public int cardCorruptionGain;
+        public int cardDamage;
+        public int cardHealth;
+        public int cardBlock;
 
         public enum CardType
         {

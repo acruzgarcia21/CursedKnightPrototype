@@ -13,7 +13,11 @@ MonoBehaviour:
   m_Name: IronWall
   m_EditorClassIdentifier: Assembly-CSharp::CursedKnight.Card
   cardName: Iron Wall
-  cardEnergyCost: 2
   cardDescription: Gain 14 block
+  cardType: 00000000
+  cardSprite: {fileID: 0}
+  cardEnergyCost: 2
   cardCorruptionGain: 0
-  cardType: 1
+  cardDamage: 0
+  cardHealth: 0
+  cardBlock: 0
