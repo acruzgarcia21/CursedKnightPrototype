@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using CursedKnight;
@@ -13,6 +14,8 @@ public class HandManager : MonoBehaviour
     public float fanSpread = 7.5f;
     // Hold a list of card objects in player's hand
     public List<GameObject> cardsInHand = new List<GameObject>();
+    public int maxCardsInHand = 5;
+    
     public float cardSpacing = 100f;
     public float verticalSpacing = 100f;
     
@@ -28,6 +31,11 @@ public class HandManager : MonoBehaviour
 
     public void AddCardToHand(Card cardData)
     {
+        if (cardsInHand.Count >= maxCardsInHand)
+        {
+            Debug.Log("You already have maximum amount of cards!: " + cardsInHand.Count);
+            return;
+        }
         // Instantiate card
         // 1. GameObject
         // 2. GameObject Position
