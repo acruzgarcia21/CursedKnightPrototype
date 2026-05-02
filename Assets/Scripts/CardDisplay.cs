@@ -22,7 +22,7 @@ public class CardDisplay : MonoBehaviour
         UpdateCardDisplay();
     }
     // Updates all card data populated by each card in player's hand/deck
-    public void UpdateCardDisplay()
+    private void UpdateCardDisplay()
     {
         cardName.text = cardData.name;
         cardEnergyCost.text = cardData.cardEnergyCost.ToString();

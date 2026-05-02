@@ -4,6 +4,7 @@ using CursedKnight;
 
 public class HandManager : MonoBehaviour
 {
+    public DeckManager deckManager;
     // Assign Card Prefab In Inspector
     public GameObject cardPrefab;
     // Root of the Hand Position
@@ -17,11 +18,7 @@ public class HandManager : MonoBehaviour
     
     private void Start()
     {
-        AddCardToHand();
-        AddCardToHand();
-        AddCardToHand();
-        AddCardToHand();
-        AddCardToHand();
+        
     }
 
     public void Update()
@@ -29,7 +26,7 @@ public class HandManager : MonoBehaviour
         UpdateHandVisuals();
     }
 
-    private void AddCardToHand()
+    public void AddCardToHand(Card cardData)
     {
         // Instantiate card
         // 1. GameObject
@@ -38,6 +35,9 @@ public class HandManager : MonoBehaviour
         // 4. Transform Parent
         var newCard = Instantiate(cardPrefab, handTransform.position, Quaternion.identity, handTransform);
         cardsInHand.Add(newCard);
+        
+        // Set the card data of the instantiated card
+        newCard.GetComponent<CardDisplay>().cardData = cardData;
 
         UpdateHandVisuals();
     }
