@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -15,7 +16,15 @@ public class CardMovement : MonoBehaviour, IDragHandler, IPointerDownHandler, IP
     private Vector3 _originalScale;
     
     // TO DO: Convert to enums for better readability
-    private int _currentState = 0;
+    private enum CardState
+    {
+        Idle,
+        Hover,
+        Drag,
+        Play
+    }
+
+    private CardState _currentState = CardState.Idle;
     
     private Quaternion _originalRotation;
     private Vector3 _originalPosition;
@@ -40,29 +49,32 @@ public class CardMovement : MonoBehaviour, IDragHandler, IPointerDownHandler, IP
     {
         switch (_currentState)
         {
-            case 1:
+            case CardState.Hover:
                 HandleHoverState();
                 break;
-            case 2:
+            case CardState.Drag:
                 HandleDragState();
                 if (!Input.GetMouseButton(0)) // Check if mouse button is released
                 {
-                    TransitionToStateZero();
+                    ReturnToIdleState();
                 }
                 break;
-            case 3:
+            case CardState.Play:
                 HandlePlayState();
                 if (!Input.GetMouseButton(0)) // Check if mouse button is released
                 {
-                    TransitionToStateZero();
+                    ReturnToIdleState();
                 }
+                break;
+            case CardState.Idle:
+            default:
                 break;
         }
     }
 
-    private void TransitionToStateZero()
+    private void ReturnToIdleState()
     {
-        _currentState = 0;
+        _currentState = CardState.Idle;
         _rectTransform.localScale = _originalScale;       // Reset Scale
         _rectTransform.localRotation = _originalRotation; // Reset Rotation
         _rectTransform.localPosition = _originalPosition; // Reset Position
@@ -72,24 +84,24 @@ public class CardMovement : MonoBehaviour, IDragHandler, IPointerDownHandler, IP
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        if (_currentState != 0) return;
+        if (_currentState != CardState.Idle) return;
         _originalPosition = _rectTransform.localPosition;
         _originalRotation = _rectTransform.localRotation;
         _originalScale = _rectTransform.localScale;
             
-        _currentState = 1;
+        _currentState = CardState.Hover;
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        if (_currentState != 1) return;
-        TransitionToStateZero();
+        if (_currentState != CardState.Hover) return;
+        ReturnToIdleState();
     }
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        if (_currentState != 1) return;
-        _currentState = 2; // Drag State
+        if (_currentState != CardState.Hover) return;
+        _currentState = CardState.Drag; // Drag State
         
         RectTransformUtility.ScreenPointToLocalPointInRectangle(
             _canvas.GetComponent<RectTransform>(), // Gets position of mouse on screen
@@ -103,7 +115,7 @@ public class CardMovement : MonoBehaviour, IDragHandler, IPointerDownHandler, IP
 
     public void OnDrag(PointerEventData eventData)
     {
-        if (_currentState != 2) return;
+        if (_currentState != CardState.Drag) return;
         
         if (!RectTransformUtility.ScreenPointToLocalPointInRectangle(
                 _canvas.GetComponent<RectTransform>(),
@@ -122,7 +134,7 @@ public class CardMovement : MonoBehaviour, IDragHandler, IPointerDownHandler, IP
 
         if (!(_rectTransform.localPosition.y > cardPlay.y)) return;
         
-        _currentState = 3;
+        _currentState = CardState.Play;
         playArrow.SetActive(true);
         _rectTransform.localPosition = playPosition;
     }
@@ -146,7 +158,7 @@ public class CardMovement : MonoBehaviour, IDragHandler, IPointerDownHandler, IP
 
         if (!(Input.mousePosition.y < cardPlay.y)) return;
         
-        _currentState = 2;
+        _currentState = CardState.Drag;
         playArrow.SetActive(false);
     }
 }
