@@ -16,6 +16,12 @@ public class DeckManager : MonoBehaviour
         
         // Add the loaded cards to the cardDeck list
         cardDeck.AddRange(cards);
+        
+        var hand = FindFirstObjectByType<HandManager>();
+        for (var i = 0; i < 6; i++)
+        {
+            DrawCard(hand);
+        }
     }
 
     public void DrawCard(HandManager handManager)
