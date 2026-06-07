@@ -2,7 +2,8 @@ using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class CardMovement : MonoBehaviour, IDragHandler, IPointerDownHandler, IPointerEnterHandler, IPointerExitHandler
+public class CardMovement : MonoBehaviour, IDragHandler, IPointerDownHandler, IPointerUpHandler, IPointerEnterHandler,
+    IPointerExitHandler
 {
     // For object
     private RectTransform _rectTransform;
@@ -19,9 +20,9 @@ public class CardMovement : MonoBehaviour, IDragHandler, IPointerDownHandler, IP
     private enum CardState
     {
         Idle,
-        Hover,
-        Drag,
-        Play
+        Hovering,
+        Dragging,
+        Playing
     }
 
     private CardState _currentState = CardState.Idle;
@@ -49,22 +50,14 @@ public class CardMovement : MonoBehaviour, IDragHandler, IPointerDownHandler, IP
     {
         switch (_currentState)
         {
-            case CardState.Hover:
+            case CardState.Hovering:
                 HandleHoverState();
                 break;
-            case CardState.Drag:
+            case CardState.Dragging:
                 HandleDragState();
-                if (!Input.GetMouseButton(0)) // Check if mouse button is released
-                {
-                    ReturnToIdleState();
-                }
                 break;
-            case CardState.Play:
+            case CardState.Playing:
                 HandlePlayState();
-                if (!Input.GetMouseButton(0)) // Check if mouse button is released
-                {
-                    ReturnToIdleState();
-                }
                 break;
             case CardState.Idle:
             default:
@@ -89,19 +82,19 @@ public class CardMovement : MonoBehaviour, IDragHandler, IPointerDownHandler, IP
         _originalRotation = _rectTransform.localRotation;
         _originalScale = _rectTransform.localScale;
             
-        _currentState = CardState.Hover;
+        _currentState = CardState.Hovering;
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        if (_currentState != CardState.Hover) return;
+        if (_currentState != CardState.Hovering) return;
         ReturnToIdleState();
     }
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        if (_currentState != CardState.Hover) return;
-        _currentState = CardState.Drag; // Drag State
+        if (_currentState != CardState.Hovering) return;
+        _currentState = CardState.Dragging; // Drag State
         
         RectTransformUtility.ScreenPointToLocalPointInRectangle(
             _canvas.GetComponent<RectTransform>(), // Gets position of mouse on screen
@@ -113,9 +106,18 @@ public class CardMovement : MonoBehaviour, IDragHandler, IPointerDownHandler, IP
         _originalPanelLocalPosition = _rectTransform.localPosition;
     }
 
+    public void OnPointerUp(PointerEventData eventData)
+    {
+        if (_currentState != CardState.Dragging &&
+            _currentState != CardState.Playing)
+            return;
+
+        ReturnToIdleState();
+    }
+
     public void OnDrag(PointerEventData eventData)
     {
-        if (_currentState != CardState.Drag) return;
+        if (_currentState != CardState.Dragging) return;
         
         if (!RectTransformUtility.ScreenPointToLocalPointInRectangle(
                 _canvas.GetComponent<RectTransform>(),
@@ -134,7 +136,7 @@ public class CardMovement : MonoBehaviour, IDragHandler, IPointerDownHandler, IP
 
         if (!(_rectTransform.localPosition.y > cardPlay.y)) return;
         
-        _currentState = CardState.Play;
+        _currentState = CardState.Playing;
         playArrow.SetActive(true);
         _rectTransform.localPosition = playPosition;
     }
@@ -158,7 +160,7 @@ public class CardMovement : MonoBehaviour, IDragHandler, IPointerDownHandler, IP
 
         if (!(Input.mousePosition.y < cardPlay.y)) return;
         
-        _currentState = CardState.Drag;
+        _currentState = CardState.Dragging;
         playArrow.SetActive(false);
     }
 }
