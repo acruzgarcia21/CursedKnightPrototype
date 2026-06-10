@@ -5,33 +5,47 @@ using UnityEngine;
 
 public class DeckManager : MonoBehaviour
 {
-    public List<Card> cardDeck = new List<Card>();
-    
-    private int _currentCardIndex = 0;
+    public List<Card> allCards = new List<Card>();
 
-    public void Start()
+    public int startingHandSize = 6;
+
+    private int _currentIndex = 0;
+    public int maxHandSize;
+    public int currentHandSize;
+    private HandManager _handManager;
+
+    private void Start()
     {
         // Load all card assets from the Resources folder
         var cards = Resources.LoadAll<Card>("Cards");
-        
-        // Add the loaded cards to the cardDeck list
-        cardDeck.AddRange(cards);
-        
-        var hand = FindFirstObjectByType<HandManager>();
-        for (var i = 0; i < 6; i++)
+
+        // Add the loaded cards to the allCards list
+        allCards.AddRange(cards);
+
+        _handManager = FindFirstObjectByType<HandManager>();
+        maxHandSize = _handManager.maxCardsInHand;
+        for (var i = 0; i < startingHandSize; i++)
         {
-            DrawCard(hand);
+            Debug.Log($"Drawing Card");
+            DrawCard(_handManager);
+        }
+    }
+
+    private void Update()
+    {
+        if (_handManager != null)
+        {
+            currentHandSize = _handManager.cardsInHand.Count;
         }
     }
 
     public void DrawCard(HandManager handManager)
     {
-        if (cardDeck.Count == 0) return;
+        if (allCards.Count == 0) return;
+        if (currentHandSize >= maxHandSize) return;
         
-        // Look to the next card according to the current index
-        // Add that card to our hand while updating the current card index
-        var nextCard = cardDeck[_currentCardIndex];
+        var nextCard = allCards[_currentIndex];
         handManager.AddCardToHand(nextCard);
-        _currentCardIndex =  (_currentCardIndex + 1) % cardDeck.Count;
+        _currentIndex = (_currentIndex + 1) % allCards.Count;
     }
 }

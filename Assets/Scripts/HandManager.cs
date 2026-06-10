@@ -5,7 +5,6 @@ using CursedKnight;
 
 public class HandManager : MonoBehaviour
 {
-    public DeckManager deckManager;
     // Assign Card Prefab In Inspector
     public GameObject cardPrefab;
     // Root of the Hand Position
