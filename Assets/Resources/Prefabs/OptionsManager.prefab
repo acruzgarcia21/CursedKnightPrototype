@@ -44,3 +44,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb6dd071c8a065843a78b9a1ef025e8c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::OptionsManager
+  mutingAudio: 0
+  fontList:
+  - {fileID: 11400000, guid: 7889dfadaf64a074d957dcce878fa38d, type: 2}
+  - {fileID: 11400000, guid: 56d253d2b6f552b4c94a397c99d05a8e, type: 2}
+  - {fileID: 11400000, guid: 7889dfadaf64a074d957dcce878fa38d, type: 2}
+  - {fileID: 11400000, guid: 9e7b2e80e2281274ba94b922835bc498, type: 2}
+  - {fileID: 11400000, guid: 9e7b2e80e2281274ba94b922835bc498, type: 2}
