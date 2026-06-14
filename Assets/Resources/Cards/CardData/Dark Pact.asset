@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff015732792c77e4eb49056e964b05b4, type: 3}
   m_Name: Dark Pact
   m_EditorClassIdentifier: Assembly-CSharp::UtilityCard
-  cardName: 
-  cardDescription: 
-  cardType: 0
+  cardName: Dark Pact
+  cardDescription: Gain 2 Energy
+  cardType: 2
   cardSprite: {fileID: 0}
   cardEnergyCost: 0
-  cardCorruptionGain: 0
+  cardCorruptionGain: 3
   cardHealthGain: 0
-  cardEnergyGain: 0
+  cardEnergyGain: 2
   cardsToDraw: 0

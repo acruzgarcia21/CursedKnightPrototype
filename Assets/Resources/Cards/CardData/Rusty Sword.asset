@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Rusty Sword
   m_EditorClassIdentifier: Assembly-CSharp::Attack
   cardName: Rusty Sword
-  cardDescription: 6 Damage
+  cardDescription: Deal 4 damage
   cardType: 0
   cardSprite: {fileID: 0}
   cardEnergyCost: 1
   cardCorruptionGain: 0
-  cardDamage: 6
+  cardDamage: 4

@@ -12,11 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff015732792c77e4eb49056e964b05b4, type: 3}
   m_Name: Second Wind
   m_EditorClassIdentifier: Assembly-CSharp::UtilityCard
-  cardName: 
-  cardDescription: 
-  cardType: 0
+  cardName: Second Wind
+  cardDescription: Gain 6 health
+  cardType: 2
   cardSprite: {fileID: 0}
-  cardEnergyCost: 0
+  cardEnergyCost: 2
   cardCorruptionGain: 0
-  cardHealthGain: 0
+  cardHealthGain: 6
   cardEnergyGain: 0
+  cardsToDraw: 0

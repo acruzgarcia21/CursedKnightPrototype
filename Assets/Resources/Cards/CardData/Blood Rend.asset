@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cd9c383cbbfd24458b3beea015b76c5, type: 3}
   m_Name: Blood Rend
   m_EditorClassIdentifier: Assembly-CSharp::Attack
-  cardName: 
-  cardDescription: 
+  cardName: Blood Rend
+  cardDescription: Deal 2 x 6 damage
   cardType: 0
   cardSprite: {fileID: 0}
-  cardEnergyCost: 0
-  cardCorruptionGain: 0
-  cardDamage: 0
+  cardEnergyCost: 1
+  cardCorruptionGain: 1
+  cardDamage: 12
