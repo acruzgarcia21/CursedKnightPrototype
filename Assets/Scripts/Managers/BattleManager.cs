@@ -3,12 +3,12 @@ using UnityEngine;
 public class BattleManager : MonoBehaviour
 {
     public static BattleManager Instance  { get; private set; }
-    
     public EnemyManager EnemyManager { get; private set; }
     public TurnManager TurnManager { get; private set; }
     public HandManager HandManager { get; private set; }
     public DrawPileManager DrawPileManager { get; private set; }
     public DiscardManager DiscardManager { get; private set; }
+    
     
     private void Awake()
     {
@@ -22,7 +22,7 @@ public class BattleManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
-
+    
     private void InitializeMangers()
     {
         EnemyManager    = GetComponentInChildren<EnemyManager>();

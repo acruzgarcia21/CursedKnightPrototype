@@ -44,3 +44,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22699ad96b8d65c4081be505271bc588, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyManager
+  enemyPrefab: {fileID: 478064832413887238, guid: 2d993d6c8944b434eb2a9ac5efca44b3, type: 3}
+  playerPrefab: {fileID: 3894402963841512277, guid: 404bedb6efb2e474cb60307b2621680b, type: 3}
+  enemiesToSpawn: 4
+  enemyStorage: []
+  enemySpawnPositions: []
+  currentEnemies: []

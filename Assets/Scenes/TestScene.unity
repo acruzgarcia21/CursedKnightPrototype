@@ -509,6 +509,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3064942670328895587, guid: 32da3d5058a3e9c4c9de9370bae55014, type: 3}
+      propertyPath: enemyPrefab
+      value: 
+      objectReference: {fileID: 478064832413887238, guid: 2d993d6c8944b434eb2a9ac5efca44b3, type: 3}
+    - target: {fileID: 3064942670328895587, guid: 32da3d5058a3e9c4c9de9370bae55014, type: 3}
+      propertyPath: playerPrefab
+      value: 
+      objectReference: {fileID: 3894402963841512277, guid: 404bedb6efb2e474cb60307b2621680b, type: 3}
     - target: {fileID: 6176082724194215729, guid: 32da3d5058a3e9c4c9de9370bae55014, type: 3}
       propertyPath: m_Name
       value: BattleManager
