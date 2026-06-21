@@ -7,17 +7,16 @@ public class DrawPileManager : MonoBehaviour
 {
     public List<Card> drawPile = new List<Card>();
     
-    public int startingHandSize = 6;
-
-    private int _currentIndex = 0;
     public int maxHandSize;
     public int currentHandSize;
+    
+    public TextMeshProUGUI drawPileCounter;
+    
+    private int _currentIndex = 0;
+
     private HandManager _handManager;
     
     private DiscardManager _discardManager;
-    
-    public TextMeshProUGUI drawPileCounter;
-
     private void Start()
     {
         _handManager = FindFirstObjectByType<HandManager>();
@@ -62,6 +61,14 @@ public class DrawPileManager : MonoBehaviour
         drawPile.RemoveAt(_currentIndex);
         UpdateDrawPileCount();
         if (drawPile.Count > 0) _currentIndex %= drawPile.Count;
+    }
+
+    public void DrawCards(int numCardsToDraw)
+    {
+        for (var i = 0; i < numCardsToDraw; i++)
+        {
+            DrawCard(_handManager);
+        }
     }
 
     private void RefillDeckFromDiscard()

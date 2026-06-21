@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 using CursedKnight;
@@ -18,16 +17,13 @@ public class HandManager : MonoBehaviour
     public float cardSpacing = 100f;
     public float verticalSpacing = 100f;
     
-    private void Start()
-    {
-        
-    }
+    private DiscardManager _discardManager;
 
-    public void Update()
+    private void Awake()
     {
-        //UpdateHandVisuals();
+        _discardManager = FindFirstObjectByType<DiscardManager>();
     }
-
+    
     public void BattleSetup(int setMaxHandSize)
     {
         maxCardsInHand = setMaxHandSize;
@@ -51,6 +47,18 @@ public class HandManager : MonoBehaviour
         // Set the card data of the instantiated card
         newCard.GetComponent<CardDisplay>().cardData = cardData;
 
+        UpdateHandVisuals();
+    }
+
+    public void DiscardHand()
+    {
+        foreach (var card in cardsInHand)
+        {
+            var cardData = card.GetComponent<CardDisplay>().cardData;
+            _discardManager.AddToDiscardPile(cardData);
+            Destroy(card.gameObject);
+        }
+        cardsInHand.Clear();
         UpdateHandVisuals();
     }
 
