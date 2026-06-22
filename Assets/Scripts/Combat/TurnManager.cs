@@ -45,10 +45,7 @@ public class TurnManager : MonoBehaviour
     
     public void EnemyTurn()
     {
-        foreach (var enemy in _enemyManager.currentEnemies)
-        {
-            _player.TakeDamage(enemy.enemyData.enemyAttackDamage);
-        }
+        _enemyManager.ProcessEnemyTurn(_player);
     }
 
     public void StartPlayerTurn()

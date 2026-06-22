@@ -63,6 +63,14 @@ public class EnemyManager : MonoBehaviour
         enemy.BattleSetup();
     }
 
+    public void ProcessEnemyTurn(Player player)
+    {
+        foreach (var enemy in currentEnemies)
+        {
+            player.TakeDamage(enemy.enemyData.enemyAttackDamage);
+        }
+    }
+
     public Enemy GetFirstLivingEnemy()
     {
         return currentEnemies.Count > 0 ? currentEnemies[0] : null;
