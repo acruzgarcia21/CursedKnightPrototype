@@ -67,7 +67,7 @@ public class EnemyManager : MonoBehaviour
     {
         foreach (var enemy in currentEnemies)
         {
-            player.TakeDamage(enemy.enemyData.enemyAttackDamage);
+            enemy.TakeTurn(player);
         }
     }
 
