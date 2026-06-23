@@ -21,8 +21,6 @@ public class TurnManager : MonoBehaviour
         _uiManager       = FindFirstObjectByType<UIManager>();
     }
 
-    
-
     public void EndTurn()
     {
         if (currentState != TurnState.Player) return;

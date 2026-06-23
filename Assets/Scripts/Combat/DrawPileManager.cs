@@ -44,7 +44,6 @@ public class DrawPileManager : MonoBehaviour
         
         UpdateDrawPileCount();
         if (drawPile.Count > 0) _currentIndex %= drawPile.Count;
-        
         return nextCard;
     }
 
