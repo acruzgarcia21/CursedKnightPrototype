@@ -308,7 +308,7 @@ public class CardMovement : MonoBehaviour, IDragHandler, IPointerDownHandler, IP
 
     private void SendCardToDiscard()
     {
-        _handManager.cardsInHand.Remove(gameObject);
+        _handManager.RemoveCardFromHand(gameObject);
         _discardManager.AddToDiscardPile(_cardData);
         Destroy(gameObject);
     }
