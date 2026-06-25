@@ -1,40 +1,35 @@
 using System.Collections.Generic;
-using TMPro;
 using CursedKnight;
 using UnityEngine;
 
 public class DiscardManager : MonoBehaviour
 {
-    [SerializeField] public List<Card> discardPile = new List<Card>();
-    public TextMeshProUGUI discardCount;
-    public int discardCardsCount;
-
+    private DiscardPileDisplay _discardPileDisplay;
+    private readonly List<Card> _discardPile = new List<Card>();
+    
     private void Awake()
     {
-        UpdateDiscardCount();
+        _discardPileDisplay = FindFirstObjectByType<DiscardPileDisplay>();
+        _discardPileDisplay.UpdateDiscardCount(_discardPile);
     }
 
-    private void UpdateDiscardCount()
-    {
-        discardCount.text = discardPile.Count.ToString();
-        discardCardsCount = discardPile.Count;
-    }
+    
 
     public void AddToDiscardPile(Card card)
     {
         if (card == null) return;
         
-        discardPile.Add(card);
-        UpdateDiscardCount();
+        _discardPile.Add(card);
+        _discardPileDisplay.UpdateDiscardCount(_discardPile);
     }
 
     public Card PullFromDiscardPile()
     {
         if (!IsDiscardPileEmpty())
         {
-            var cardToReturn = discardPile[discardPile.Count - 1];
-            discardPile.RemoveAt(discardPile.Count - 1);
-            UpdateDiscardCount();
+            var cardToReturn = _discardPile[^1];
+            _discardPile.RemoveAt(_discardPile.Count - 1);
+            _discardPileDisplay.UpdateDiscardCount(_discardPile);
             return cardToReturn;
         }
         else
@@ -45,10 +40,10 @@ public class DiscardManager : MonoBehaviour
 
     public bool SelectCardFromDiscardPile(Card card)
     {
-        if (!IsDiscardPileEmpty() && discardPile.Contains(card))
+        if (!IsDiscardPileEmpty() && _discardPile.Contains(card))
         {
-            discardPile.Remove(card);
-            UpdateDiscardCount();
+            _discardPile.Remove(card);
+            _discardPileDisplay.UpdateDiscardCount(_discardPile);
             return true;
         }
         else
@@ -61,9 +56,9 @@ public class DiscardManager : MonoBehaviour
     {
         if (!IsDiscardPileEmpty())
         {
-            var cardsToReturn = new List<Card>(discardPile);
-            discardPile.Clear();
-            UpdateDiscardCount();
+            var cardsToReturn = new List<Card>(_discardPile);
+            _discardPile.Clear();
+            _discardPileDisplay.UpdateDiscardCount(_discardPile);
             return cardsToReturn;
         }
         else
@@ -72,9 +67,9 @@ public class DiscardManager : MonoBehaviour
         }
     }
 
-    private bool IsDiscardPileEmpty()
+    public bool IsDiscardPileEmpty()
     {
-        return discardPile.Count == 0;
+        return _discardPile.Count <= 0;
     }
     
 }

@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using CursedKnight;
 using TMPro;
@@ -48,7 +47,7 @@ public class DrawPileManager : MonoBehaviour
 
     private void RefillDeckFromDiscard()
     {
-        if (_discardManager == null || _discardManager.discardCardsCount <= 0) return;
+        if (_discardManager.IsDiscardPileEmpty()) return;
         
         _drawPile = _discardManager.PullAllFromDiscardPile();
         Utility.Shuffle(_drawPile);
