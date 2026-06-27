@@ -13,7 +13,7 @@ public class CardPlayManager : MonoBehaviour
         _discardManager = FindFirstObjectByType<DiscardManager>();
     }
 
-    public bool TryPlayCard(Player player, Card cardData, GameObject cardObject)
+    public bool TryPlayCard(Player player, Card cardData, GameObject cardObject, Enemy targetEnemy)
     {
         if (cardData == null) return false;
         
@@ -25,20 +25,18 @@ public class CardPlayManager : MonoBehaviour
 
         return cardData.cardType switch
         {
-            Card.CardType.Attack => TryPlayAttack(player, cardData, cardObject),
+            Card.CardType.Attack => TryPlayAttack(player, cardData, cardObject, targetEnemy),
             Card.CardType.Defense => TryPlayDefense(player, cardData, cardObject),
             Card.CardType.Utility => TryPlayUtility(player, cardData, cardObject),
             _ => false
         };
     }
 
-    private bool TryPlayAttack(Player player, Card cardData, GameObject cardObject)
+    private bool TryPlayAttack(Player player, Card cardData, GameObject cardObject, Enemy targetEnemy)
     {
         var attackCard = cardData as Attack;
         if (attackCard == null) return false;
-
-        var enemy = BattleManager.Instance.EnemyManager.GetFirstLivingEnemy();
-        if (enemy == null) return false;
+        if (targetEnemy == null) return false;
         
         if (attackCard.cardCorruptionGain > 0)
         {
@@ -52,7 +50,7 @@ public class CardPlayManager : MonoBehaviour
         
         Debug.Log($"Played attack card: {attackCard.cardName}, Damage: {attackCard.cardDamage}");
         
-        enemy.TakeDamage(attackCard.cardDamage);
+        targetEnemy.TakeDamage(attackCard.cardDamage);
         
         SendCardToDiscard(cardData, cardObject);
         return true;

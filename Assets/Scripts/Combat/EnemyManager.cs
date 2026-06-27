@@ -67,12 +67,6 @@ public class EnemyManager : MonoBehaviour
         }
     }
 
-    // Prototype targeting logic
-    public Enemy GetFirstLivingEnemy()
-    {
-        return currentEnemies.Count > 0 ? currentEnemies[0] : null;
-    }
-
     public void RemoveEnemy(Enemy enemyToRemove)
     {
         currentEnemies.Remove(enemyToRemove);
@@ -85,7 +79,7 @@ public class EnemyManager : MonoBehaviour
         }
     }
 
-    public bool AllEnemiesDead()
+    private bool AllEnemiesDead()
     {
         return currentEnemies.Count == 0;
     }
