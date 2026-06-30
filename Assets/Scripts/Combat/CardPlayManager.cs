@@ -1,4 +1,4 @@
-using System;
+using System.Collections.Generic;
 using CursedKnight;
 using UnityEngine;
 
@@ -25,7 +25,11 @@ public class CardPlayManager : MonoBehaviour
             return false;
         }
 
-        if (!IsTargetValid(player, cardData, targetEnemy)) return false;
+        if (!IsTargetValid(player, cardData, targetEnemy))
+        {
+            Debug.Log("Invalid Target");
+            return false;
+        }
 
         return cardData.cardType switch
         {
@@ -40,7 +44,6 @@ public class CardPlayManager : MonoBehaviour
     {
         var attackCard = cardData as Attack;
         if (attackCard == null) return false;
-        if (targetEnemy == null) return false;
         
         if (attackCard.cardCorruptionGain > 0)
         {
@@ -54,7 +57,30 @@ public class CardPlayManager : MonoBehaviour
         
         Debug.Log($"Played attack card: {attackCard.cardName}, Damage: {attackCard.cardDamage}");
         
-        targetEnemy.TakeDamage(attackCard.cardDamage);
+        switch (cardData.targetType)
+        {
+            case Card.TargetType.AllEnemies:
+            {
+                var allLivingEnemies = _enemyManager.GetLivingEnemies();
+                foreach (var enemy in allLivingEnemies)
+                {
+                    enemy.TakeDamage(attackCard.cardDamage);
+                }
+
+                break;
+            }
+            case Card.TargetType.RandomEnemy:
+            {
+                var allLivingEnemies = _enemyManager.GetLivingEnemies();
+                var randomEnemyIndex = Random.Range(0, allLivingEnemies.Count);
+                allLivingEnemies[randomEnemyIndex].TakeDamage(attackCard.cardDamage);
+                break;
+            }
+            case Card.TargetType.SingleEnemy:
+            default:
+                targetEnemy.TakeDamage(attackCard.cardDamage);
+                break;
+        }
         
         SendCardToDiscard(cardData, cardObject);
         return true;
