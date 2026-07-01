@@ -17,7 +17,7 @@ MonoBehaviour:
   cardType: 2
   targetType: 4
   cardSprite: {fileID: 0}
-  cardEnergyCost: 0
+  cardEnergyCost: 1
   cardCorruptionGain: 0
   cardHealthGain: 0
   cardEnergyGain: 0
