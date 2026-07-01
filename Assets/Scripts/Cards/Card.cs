@@ -15,6 +15,7 @@ namespace CursedKnight
         
         public int cardEnergyCost;
         public int cardCorruptionGain;
+        public int cardsToDraw;
 
         public enum CardType
         {

@@ -6,5 +6,4 @@ public class UtilityCard : Card
 {
     public int cardHealthGain;
     public int cardEnergyGain;
-    public int cardsToDraw;
 }
