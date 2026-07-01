@@ -57,6 +57,11 @@ public class HandManager : MonoBehaviour
 
         if (numCardsToDraw <= 0) return;
         
+        DrawCards(numCardsToDraw);
+    }
+
+    public void DrawCards(int numCardsToDraw)
+    {
         for (var i = 0; i < numCardsToDraw; i++)
         {
             var cardToDraw = _drawPileManager.DrawCard();

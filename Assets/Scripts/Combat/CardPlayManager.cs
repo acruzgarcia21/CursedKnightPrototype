@@ -112,6 +112,11 @@ public class CardPlayManager : MonoBehaviour
             player.Heal(utilityCard.cardHealthGain);
         }
         
+        if (utilityCard.cardsToDraw > 0)
+        {
+            _handManager.DrawCards(utilityCard.cardsToDraw);
+        }
+        
         Debug.Log($"Played utility card: " +
                   $"{utilityCard.cardName}, " +
                   $"Health: {utilityCard.cardHealthGain}, " +
