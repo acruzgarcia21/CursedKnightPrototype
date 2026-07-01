@@ -84,6 +84,7 @@ public class CardPlayManager : MonoBehaviour
                 break;
         }
         
+        DrawCardsFromCard(player, attackCard);
         SendCardToDiscard(cardData, cardObject);
         return true;
     }
@@ -98,6 +99,8 @@ public class CardPlayManager : MonoBehaviour
         
         player.GainBlock(defenseCard.cardBlock);
 
+        DrawCardsFromCard(player, defenseCard);
+        
         Debug.Log($"Played defense card: {defenseCard.cardName}, Block: {defenseCard.cardBlock}, Energy Spent: {defenseCard.cardEnergyCost}");
         SendCardToDiscard(cardData, cardObject);
         return true;
@@ -121,10 +124,7 @@ public class CardPlayManager : MonoBehaviour
             player.Heal(utilityCard.cardHealthGain);
         }
         
-        if (utilityCard.cardsToDraw > 0)
-        {
-            _handManager.DrawCards(utilityCard.cardsToDraw);
-        }
+        DrawCardsFromCard(player, utilityCard);
         
         Debug.Log($"Played utility card: " +
                   $"{utilityCard.cardName}, " +
@@ -175,6 +175,14 @@ public class CardPlayManager : MonoBehaviour
         if (cardData.cardCorruptionGain > 0)
         {
             player.GainCorruption(cardData.cardCorruptionGain);
+        }
+    }
+
+    private void DrawCardsFromCard(Player player, Card cardData)
+    {
+        if (cardData.cardsToDraw > 0)
+        {
+            _handManager.DrawCards(cardData.cardsToDraw);
         }
     }
 }
